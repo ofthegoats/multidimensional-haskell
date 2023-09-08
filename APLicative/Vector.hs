@@ -58,7 +58,7 @@ instance Count n => Naperian (Vector n) where
 
 instance Foldable (Vector n) where
   foldr _ e VNil = e
-  foldr f e (VCons x xs) = foldr f (f x e) xs
+  foldr f e (VCons x xs) = f x (foldr f e xs)
 
 instance Traversable (Vector n) where
   traverse _ VNil = pure VNil
