@@ -1,0 +1,30 @@
+#+title: APLicative
+
+Written for learning purposes using [[https://www.cs.ox.ac.uk/people/jeremy.gibbons/publications/aplicative.pdf][APLicative Programming with Naperian Functors]]
+
+* Summary
+** Naperian Functors
+
+A Naperian Functor is one of known, fixed size, witnessed by the following typeclass.
+
+#+begin_src haskell
+type Naperian :: (* -> *) -> Constraint
+class Functor f => Naperian f where
+  type Log f -- base type @p@ of positions, st. f a ≃ p -> a
+
+  lookup :: f a -> Log f -> a
+
+  tabulate :: (Log f -> a) -> f a
+  tabulate h = fmap h positions
+
+  positions :: f (Log f)
+  positions = tabulate id
+
+  {-# MINIMAL lookup, (tabulate | positions) #-}
+#+end_src
+
+For any Naperian functor =f= there exists a "position type" =p= --- above =Log f= --- such that =f a ≃ p -> a=. This means we know all the positions and can treat the functor as though it were a function from those positions to the values it contains, like a static array.
+
+** Dimensions
+** Vectors
+** Hypercuboids

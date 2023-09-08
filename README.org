@@ -1,0 +1,3 @@
+#+title: Multidimensional
+
+Learning resources for multidimensional, rank-polymorphic programming, in Haskell
